@@ -1,1 +1,8 @@
-
+book-manage-java is a web application base on Springboot+Mybatis. 
+It has been deployed on Azure, and the exposed IP is 20.220.54.22.
+The apis to add, list, query, update and delete are as belows:
+list: /book/list
+add: /book/add
+query: /book/get/id
+delete: /book/delete/id
+update: /book/update
