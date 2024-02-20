@@ -46,7 +46,7 @@ public class BookMapperTest {
 
         List<Book> books = bookMapper.listAll();
 
-        assertEquals("Mr. Bean", books.get(1).getBookName());
+        assertEquals("Mr. Bean", books.get(2).getBookName());
     }
 
     @Test
