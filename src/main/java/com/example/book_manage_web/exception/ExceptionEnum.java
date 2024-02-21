@@ -1,7 +1,5 @@
 package com.example.book_manage_web.exception;
 
-import org.omg.CORBA.INTERNAL;
-
 public enum ExceptionEnum implements IBaseError {
 
     SUCCESS(0, "SUCCESS"),

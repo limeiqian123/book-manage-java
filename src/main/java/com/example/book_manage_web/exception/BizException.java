@@ -1,7 +1,5 @@
 package com.example.book_manage_web.exception;
 
-import com.oracle.jrockit.jfr.InvalidValueException;
-
 public class BizException extends RuntimeException {
 
     protected Integer errorCode;
