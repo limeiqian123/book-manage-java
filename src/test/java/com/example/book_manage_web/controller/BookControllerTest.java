@@ -1,7 +1,8 @@
 package com.example.book_manage_web.controller;
 
 import com.example.book_manage_web.dto.BookDto;
-import com.example.book_manage_web.service.BookService;
+import com.example.book_manage_web.exception.ExceptionEnum;
+import com.example.book_manage_web.service.IBookService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,7 +32,7 @@ public class BookControllerTest {
     MockMvc mockMvc;
 
     @MockBean
-    BookService bookService;
+    IBookService bookService;
 
     @Test
     public void testBookAdd() throws Exception {
@@ -102,7 +104,6 @@ public class BookControllerTest {
     @Test
     public void testBookDelete() throws Exception {
         Mockito.when(bookService.delete(Mockito.anyInt())).thenReturn(1);
-        //String params = "{\"id\":1}";
         mockMvc.perform(delete("/book/delete/{id}", "1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -133,6 +134,15 @@ public class BookControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value("0"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.author").value("Mrs. B"));
-
     }
+
+    @Test
+    public void testGlobalExceptionHandler() throws Exception {
+        doThrow(new RuntimeException("unknown exception")).when(bookService).list();
+
+        mockMvc.perform(get("/book/list"))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(ExceptionEnum.INTERNAL_SERVER_ERROR.getResultCode()));
+    }
+
 }

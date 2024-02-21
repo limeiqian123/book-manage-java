@@ -6,7 +6,7 @@ import com.example.book_manage_web.dto.BookDto;
 import java.util.Optional;
 import java.util.List;
 
-public interface BookService {
+public interface IBookService {
     Optional<BookDto> add(BookDto userDto);
 
     Optional<BookDto> query(Integer id);

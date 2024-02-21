@@ -2,7 +2,7 @@ package com.example.book_manage_web.controller;
 
 import com.example.book_manage_web.dto.BookDto;
 import com.example.book_manage_web.dto.Response;
-import com.example.book_manage_web.service.BookService;
+import com.example.book_manage_web.service.IBookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ import java.util.Optional;
 public class BookController {
 
     @Resource
-    BookService bookService;
+    IBookService bookService;
 
     @PostMapping("/add")
     @ResponseBody

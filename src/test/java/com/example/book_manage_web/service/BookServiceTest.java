@@ -2,7 +2,7 @@ package com.example.book_manage_web.service;
 
 import com.example.book_manage_web.dto.BookDto;
 import com.example.book_manage_web.mapper.BookMapper;
-import com.example.book_manage_web.model.Book;
+import com.example.book_manage_web.entity.Book;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BookServiceTest {
 
     @Autowired
-    private BookService bookService;
+    private IBookService IBookService;
 
     @MockBean
     private BookMapper bookMapper;
@@ -41,7 +41,7 @@ public class BookServiceTest {
         bookInput.setAuthor("Mr. White");
         bookInput.setPublishTime(1922);
 
-        Optional<BookDto> result = bookService.add(bookInput);
+        Optional<BookDto> result = IBookService.add(bookInput);
 
         assertEquals(result.get().getIsbn(),bookInput.getIsbn());
     }
@@ -57,7 +57,7 @@ public class BookServiceTest {
 
         Mockito.when(bookMapper.queryById(Mockito.anyInt())).thenReturn(bookReturn);
 
-        Optional<BookDto> result = bookService.query(1);
+        Optional<BookDto> result = IBookService.query(1);
         assertEquals("Mr. Bean", result.get().getBookName());
     }
 
@@ -75,14 +75,14 @@ public class BookServiceTest {
 
         Mockito.when(bookMapper.listAll()).thenReturn(bookEoList);
 
-        Optional<List<BookDto>> result = bookService.list();
+        Optional<List<BookDto>> result = IBookService.list();
         assertEquals(Boolean.TRUE.booleanValue(), result.get().size() > 0);
     }
 
     @Test
     public void testDelete() {
         Mockito.when(bookMapper.delete(Mockito.anyInt())).thenReturn(1);
-        assertEquals(1,bookService.delete(1));
+        assertEquals(1, IBookService.delete(1));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class BookServiceTest {
         Mockito.when(bookMapper.update(bookDto)).thenReturn(1);
         Mockito.when(bookMapper.queryById(1)).thenReturn(bookReturn);
 
-        Optional<BookDto> update = bookService.update(bookDto);
+        Optional<BookDto> update = IBookService.update(bookDto);
 
         BookDto updatedBookDto = update.get();
         assertEquals(updatedBookDto.getId(),1);

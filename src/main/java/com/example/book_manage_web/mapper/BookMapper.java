@@ -2,7 +2,7 @@ package com.example.book_manage_web.mapper;
 
 
 import com.example.book_manage_web.dto.BookDto;
-import com.example.book_manage_web.model.Book;
+import com.example.book_manage_web.entity.Book;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

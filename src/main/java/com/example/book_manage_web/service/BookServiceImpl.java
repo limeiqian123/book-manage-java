@@ -2,7 +2,7 @@ package com.example.book_manage_web.service;
 
 import com.example.book_manage_web.dto.BookDto;
 import com.example.book_manage_web.mapper.BookMapper;
-import com.example.book_manage_web.model.Book;
+import com.example.book_manage_web.entity.Book;
 import com.example.book_manage_web.util.BeanUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookServiceImpl implements BookService {
+public class BookServiceImpl implements IBookService {
 
     @Autowired
     private BookMapper bookMapper;

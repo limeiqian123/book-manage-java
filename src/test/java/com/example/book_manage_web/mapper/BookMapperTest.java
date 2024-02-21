@@ -1,7 +1,7 @@
 package com.example.book_manage_web.mapper;
 
 import com.example.book_manage_web.dto.BookDto;
-import com.example.book_manage_web.model.Book;
+import com.example.book_manage_web.entity.Book;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class BookMapperTest {
 
         List<Book> books = bookMapper.listAll();
 
-        assertEquals("Mr. Bean", books.get(2).getBookName());
+        assertEquals("Bleak House", books.get(2).getBookName());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class BookMapperTest {
     public void testUpdate(){
 
         Book book = new Book();
-        book.setId(1);
+        book.setId(2);
         book.setIsbn("9787011234662");
         book.setBookName("Bleak House");
         book.setAuthor("Toms");
